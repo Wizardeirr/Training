@@ -5,9 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
+import com.example.training.data.RegistirationDataBase
 
 import com.example.training.data.RegistrationData
+import com.example.training.data.Repository
 import com.example.training.databinding.FragmentRegistirationBinding
 import com.example.training.viewmodel.MyViewModel
 import java.util.UUID
@@ -15,9 +18,11 @@ import java.util.UUID
 class RegistirationFragment : Fragment() {
     private  var _binding: FragmentRegistirationBinding?=null
     private val binding get() =_binding!!
-    lateinit var viewModel: MyViewModel
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,7 +39,6 @@ class RegistirationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel= ViewModelProvider(this)[MyViewModel::class.java]
 
         binding.signButton.setOnClickListener {
             val name=binding.editTextUserName.text.toString()
@@ -44,13 +48,13 @@ class RegistirationFragment : Fragment() {
             val password=binding.editTextPassword.text.toString()
             val phone=binding.editTextUserPhone.text.toString().toInt()
 
-            val Input=RegistrationData(UUID.randomUUID(),name,surName,age,password,phone,email)
-            saveAllInformations(Input)
+            val Input=RegistrationData(0,name,surName,age,password,phone,email)
+
+
+
 
 
         }
     }
-    fun saveAllInformations(regi:RegistrationData){
-        viewModel.addUser(regi)
-    }
+
 }

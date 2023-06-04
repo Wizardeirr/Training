@@ -6,10 +6,10 @@ import androidx.room.PrimaryKey
 import java.util.UUID
 
 
-@Entity(tableName = "userInformation", inheritSuperIndices = true)
+@Entity(tableName = "userInformation")
 data class RegistrationData(
     @PrimaryKey(autoGenerate = true)
-    val id:UUID,
+    val id:Int=0,
     val userName:String,
     val userSurname:String,
     val userAge:Int,

@@ -13,8 +13,8 @@ import com.google.android.material.circularreveal.CircularRevealHelper.Strategy
 @Dao
 interface RegistirationDao {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertAll(register: RegistrationData)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+     fun insertAll(register: RegistrationData)
     @Delete()
     suspend fun deleteAll(register: RegistrationData)
     @Update

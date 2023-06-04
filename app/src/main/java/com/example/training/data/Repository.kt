@@ -6,7 +6,7 @@ class Repository(private val registirationDao: RegistirationDao) {
 
     val allInformations: LiveData<List<RegistrationData>> = registirationDao.getAllUserInformation()
 
-    suspend fun insert(register:RegistrationData){
+      fun insert(register:RegistrationData){
         registirationDao.insertAll(register)
     }
     suspend fun delete(register:RegistrationData){
