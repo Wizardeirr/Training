@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.training.R
+import com.volkankelleci.training.R
 
 class UserInfoFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {

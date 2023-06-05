@@ -13,13 +13,12 @@ import com.google.android.material.circularreveal.CircularRevealHelper.Strategy
 @Dao
 interface RegistirationDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-     fun insertAll(register: RegistrationData)
-    @Delete()
-    suspend fun deleteAll(register: RegistrationData)
-    @Update
-    suspend fun update(register: RegistrationData)
+    @Insert
+     suspend fun insertAll(register: RegistrationData)
+
+    @Query("DELETE FROM userInformation")
+    suspend fun deleteAllUsers()
 
     @Query("SELECT * FROM userInformation")
-    fun getAllUserInformation():LiveData<List<RegistrationData>>
+    suspend fun getUsers(): List<RegistrationData>
 }

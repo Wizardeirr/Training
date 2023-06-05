@@ -6,26 +6,27 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.Transaction
 
-@Database(entities = [RegistrationData::class], version = 1)
+@Database(entities = [RegistrationData::class], version = 2)
 abstract class RegistirationDataBase: RoomDatabase() {
 
     abstract fun registirationDao():RegistirationDao
 
-    companion object{
-      private var INSTANCE:RegistirationDataBase?=null
-        fun getInfos(context: Context):RegistirationDataBase{
-            val tempInstance= INSTANCE
-            if (tempInstance!=null){
-                return tempInstance
+    companion object {
+        @Volatile
+        private var instance: RegistirationDataBase? = null
+
+        fun getInstance(context: Context): RegistirationDataBase {
+            return instance ?: synchronized(this) {
+                instance ?: buildDatabase(context).also { instance = it }
             }
-            synchronized(this){
-                val instance=Room.databaseBuilder(
-                    context.applicationContext,
-                    RegistirationDataBase::class.java,
-                    "app").build()
-                INSTANCE=instance
-                return instance
-            }
+        }
+
+        private fun buildDatabase(context: Context): RegistirationDataBase {
+            return Room.databaseBuilder(
+                context.applicationContext,
+                RegistirationDataBase::class.java,
+                "my-database"
+            ).build()
         }
     }
 

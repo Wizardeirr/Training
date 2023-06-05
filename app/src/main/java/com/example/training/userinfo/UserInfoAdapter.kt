@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.training.data.RegistrationData
-import com.example.training.databinding.UserinforawBinding
+import com.volkankelleci.training.databinding.UserinforawBinding
 
 class UserInfoAdapter(private val userList:List<RegistrationData>): RecyclerView.Adapter<UserInfoAdapter.UserInfoViewHolder>() {
     class UserInfoViewHolder(val binding: UserinforawBinding):RecyclerView.ViewHolder(binding.root) {

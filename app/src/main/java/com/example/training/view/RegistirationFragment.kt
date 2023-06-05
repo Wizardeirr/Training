@@ -5,19 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.training.data.RegistirationDataBase
-
 import com.example.training.data.RegistrationData
-import com.example.training.data.Repository
-import com.example.training.databinding.FragmentRegistirationBinding
-import com.example.training.viewmodel.MyViewModel
-import java.util.UUID
+import com.example.training.viewmodel.LoginViewModel
+import com.volkankelleci.training.databinding.FragmentRegistirationBinding
 
 class RegistirationFragment : Fragment() {
     private  var _binding: FragmentRegistirationBinding?=null
     private val binding get() =_binding!!
+    private lateinit var viewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +37,8 @@ class RegistirationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
+        viewModel= ViewModelProvider(this).get(LoginViewModel::class.java)
+
         binding.signButton.setOnClickListener {
             val name=binding.editTextUserName.text.toString()
             val surName=binding.editTextUserSurname.text.toString()
@@ -49,12 +48,11 @@ class RegistirationFragment : Fragment() {
             val phone=binding.editTextUserPhone.text.toString().toInt()
 
             val Input=RegistrationData(0,name,surName,age,password,phone,email)
-
-
-
-
-
+            val girdi=viewModel.insertUser(Input)
+            binding.showInfos.text=girdi.toString()
         }
+
     }
+
 
 }
